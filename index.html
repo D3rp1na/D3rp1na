@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Portfolio | Cybersecurity & Pentesting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e0a;
+            color: #00ff88;
+            overflow-x: hidden;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            animation: glowPulse 3s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88; }
+            50% { text-shadow: 0 0 30px #00ff88, 0 0 60px #00ff88, 0 0 80px #00ff88; }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #4dff99;
+            margin-bottom: 30px;
+        }
+
+        .terminal-line {
+            color: #33cc77;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #00ff88;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #0d1f0d 0%, #1a3d1a 100%);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0,255,136,0.3);
+            border-color: #4dff99;
+        }
+
+        .card-title {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #4dff99;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.2em;
+        }
+
+        .card-desc {
+            color: #99ffcc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid #00ff88;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #4dff99;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: rgba(0,255,136,0.3);
+            transform: scale(1.05);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 80px 0;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(0,255,136,0.05) 0%, rgba(0,255,136,0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(0,255,136,0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6f 100%);
+            color: #0a0e0a;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: all 0.3s;
+            border: 2px solid #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0,255,136,0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #33cc77;
+            border-top: 1px solid rgba(0,255,136,0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .social-links a {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 1.5em;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #4dff99;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .subtitle { font-size: 1em; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-bg" id="matrix"></canvas>
+    
+    <div class="container">
+        <header>
+            <h1>⚡ CTF PORTFOLIO ⚡</h1>
+            <div class="subtitle">Cybersecurity • Pentesting • Capture The Flag</div>
+            <div class="terminal-line">root@kali:~$ whoami</div>
+            <div class="terminal-line">> penetration_tester.offensive_security<span class="cursor"></span></div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">🎯</span>
+                    CTF Challenges
+                </div>
+                <div class="card-desc">
+                    Explore my writeups and solutions from various capture the flag competitions. From web exploitation to binary analysis, dive into my methodology and approach to solving complex security challenges.
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Web Exploitation</span>
+                    <span class="tag">Crypto</span>
+                    <span class="tag">Forensics</span>
+                    <span class="tag">Reversing</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">🛡️</span>
+                    Security Tools
+                </div>
+                <div class="card-desc">
+                    Custom tools and scripts I've developed for penetration testing, security research, and CTF competitions. Built with Python, Bash, and various offensive security frameworks.
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Bash</span>
+                    <span class="tag">Metasploit</span>
+                    <span class="tag">Automation</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">💀</span>
+                    Pentesting Projects
+                </div>
+                <div class="card-desc">
+                    Real-world penetration testing scenarios, vulnerability assessments, and security audits. Demonstrating practical application of offensive security techniques in controlled environments.
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Network Security</span>
+                    <span class="tag">OSINT</span>
+                    <span class="tag">Privilege Escalation</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">📚</span>
+                    Learning Resources
+                </div>
+                <div class="card-desc">
+                    Notes, tutorials, and resources I've compiled during my cybersecurity journey. Helping others learn the fundamentals of offensive security and CTF strategies.
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Tutorials</span>
+                    <span class="tag">Writeups</span>
+                    <span class="tag">Cheatsheets</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px; color: #00ff88;">Ready to Explore?</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px; color: #4dff99;">Check out my repositories and CTF writeups</p>
+            <a href="#" class="cta-button">View GitHub Repos</a>
+        </div>
+
+        <footer>
+            <div class="social-links">
+                <a href="#" title="GitHub">⚡ GitHub</a>
+                <a href="#" title="LinkedIn">💼 LinkedIn</a>
+                <a href="#" title="Twitter">🐦 Twitter</a>
+                <a href="#" title="Email">📧 Contact</a>
+            </div>
+            <p style="margin-top: 20px;">root@portfolio:~$ echo "Hack the planet!"</p>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            ctx.fillStyle = 'rgba(10, 14, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff88';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
