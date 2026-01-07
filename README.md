@@ -9,9 +9,11 @@ Jeopardy Style: Web, Crypto, Pwn.
 
 Attack/Defense: Strategies and post-mortems.
 
-📝 DevLog: Notes on what I am currently building or breaking.
+📝 DevLog: Notes on what I am currently building or breaking.   
+  Porting ovr CTF writeups
+  
 
-⚡ Quick Stats
+
 "The only way to truly learn is to break it, fix it, and explain it to someone else."
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) <br>
