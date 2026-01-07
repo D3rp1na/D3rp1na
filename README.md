@@ -1,4 +1,4 @@
-I participate in Capture The Flag competitions and dabble in Penetration Testing. Whenever I learn a new technique or solve a difficult box, I document it here to help the community (and my future self).
+I participate in Capture The Flag competitions and dabble in Penetration Testing. Whenever I learn a new technique or solve a box, I document it here to help the community (and my future self).
 
 🎯 Main Focus Areas
 🔎 Reconnaissance: Automating the boring stuff.
